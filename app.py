@@ -5,11 +5,11 @@ import joblib
 # Konfigurasi Halaman
 st.set_page_config(
     page_title="Customer Churn Prediction",
-    page_icon="🔮",
+    page_icon="",
     layout="wide"
 )
 
-st.title("🔮 Customer Churn Prediction")
+st.title("Customer Churn Prediction")
 st.write("Masukkan data pelanggan di bawah ini untuk memprediksi probabilitas atau status *churn*.")
 st.markdown("---")
 
@@ -24,7 +24,7 @@ model = load_model()
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader("👤 Profil & Demografi Pelanggan")
+    st.subheader(" Profil & Demografi Pelanggan")
     gender = st.selectbox("Gender", ["Male", "Female"])
     age = st.number_input("Age", min_value=18, max_value=100, value=30)
     country = st.text_input("Country", value="Indonesia")
@@ -36,7 +36,7 @@ with col1:
     payment_method = st.text_input("Payment Method", value="Credit Card")
 
 with col2:
-    st.subheader("📊 Aktivitas & Metrik Penggunaan")
+    st.subheader("Aktivitas & Metrik Penggunaan")
     total_visits = st.number_input("Total Visits", min_value=0, value=10)
     avg_session_time = st.number_input("Average Session Time (minutes)", min_value=0.0, value=15.5)
     pages_per_session = st.number_input("Pages Per Session", min_value=0.0, value=4.0)
@@ -56,7 +56,7 @@ with col2:
 st.markdown("---")
 
 # Tombol Prediksi
-if st.button("🚀 Predict Churn Status", use_container_width=True):
+if st.button(" Predict Churn Status", use_container_width=True):
     
     # 1. Bungkus input ke dalam DataFrame dengan key sesuai fitur asli model
     input_data = pd.DataFrame({
@@ -97,15 +97,15 @@ if st.button("🚀 Predict Churn Status", use_container_width=True):
             proba = None
 
         # 3. Tampilkan Hasil Ke Layar
-        st.subheader("🔮 Hasil Analisis Prediksi:")
+        st.subheader("Hasil Analisis Prediksi:")
         
         if prediction[0] == 1:
-            st.error("🚨 **Pelanggan diprediksi akan CHURN!**")
+            st.error(" **Pelanggan diprediksi akan CHURN!**")
             if proba is not None:
                 st.write(f"Probabilitas Churn: **{proba * 100:.2f}%**")
-            st.info("💡 **Rekomendasi:** Berikan penawaran khusus atau diskon retensi untuk mempertahankan pelanggan ini.")
+            st.info(" **Rekomendasi:** Berikan penawaran khusus atau diskon retensi untuk mempertahankan pelanggan ini.")
         else:
-            st.success("✅ **Pelanggan diprediksi TETAP SETIA (Not Churn)!**")
+            st.success("**Pelanggan diprediksi TETAP SETIA (Not Churn)!**")
             if proba is not None:
                 st.write(f"Probabilitas Tetap Setia: **{(1 - proba) * 100:.2f}%**")
                 
